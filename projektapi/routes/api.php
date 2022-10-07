@@ -15,10 +15,18 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::post('/addproduct/{id}', [ProductController::class, 'addProduct']);
-Route::post('/addcategory', [ProductController::class, 'addCategory']);
-Route::get('/getproducts', [ProductController::class, 'getProducts']);
-Route::get('/getcategories', [ProductController::class, 'getCategories']);
+//Post-routes
+Route::post('/addproduct/{id}', [ProductController::class, 'addProduct']); //Lägger till en produkt
+Route::post('/addcategory', [ProductController::class, 'addCategory']); //Lägger till en kategori
+//Get-routes
+Route::get('/getproducts', [ProductController::class, 'getProducts']); //Hämtar alla produkter
+Route::get('/getcategories', [ProductController::class, 'getCategories']); //Hämtar alla kategorier
+Route::get('/getproductbyid/{id}', [ProductController::class, 'getProductById']); //Hämtar enskild produkt
+//Put-routes
+Route::put('/updateproduct/{id}', [ProductController::class, 'updateProduct']); //Lägger till en produkt
+//Delete-route
+Route::delete('/deleteproduct/{id}', [ProductController::class, 'destroy']); //Lägger till en produkt
+
 
 
 
