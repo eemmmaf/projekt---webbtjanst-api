@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Om ett anrop kommer används Controllern ProductController, som sköter anropet
-Route::resource('product', ProductController::class);
+Route::post('/addproduct/{id}', [ProductController::class, 'addProduct']);
+Route::post('/addcategory', [ProductController::class, 'addCategory']);
+Route::get('/getproducts', [ProductController::class, 'getProducts']);
+Route::get('/getcategories', [ProductController::class, 'getCategories']);
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
