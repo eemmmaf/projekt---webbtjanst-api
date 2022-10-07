@@ -114,4 +114,10 @@ class ProductController extends Controller
             return response()->json(['Producten kunde inte hittas'], 404);
         }
     }
+
+    //Funktion för att söka efter produkt
+    public function searchProduct($name)
+    {
+        return Products::where('name', 'like', '%' . $name . '%')->get();
+    }
 }
