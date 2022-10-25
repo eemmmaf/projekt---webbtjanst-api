@@ -19,9 +19,10 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description');
             $table->integer('price');
-            $table->integer('quantity');
+            $table->string('quantity');
+            $table->string('shelf');
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
