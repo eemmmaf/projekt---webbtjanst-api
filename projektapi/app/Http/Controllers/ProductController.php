@@ -6,25 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Category;
 
+
 class ProductController extends Controller
 {
-    public function addProduct(Request $request, $id)
+    public function addProduct(Request $request)
     {
-        //Läser in kategorin och ser vilket id den har
-        $category = Category::find($id);
-
-        //Om kategorin inte finns och returnerar null
-        if ($category == null) {
-            return response()->json([
-                'Kategorin hittades inte'
-            ], 404);
-        }
 
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'quantity' => 'required'
+            'quantity' => 'required',
+            'shelf' => 'required',
+            'category_id' => 'required'
         ]);
 
         //Lägger till och returnerar den nya Produkten som har skapats
@@ -35,24 +29,23 @@ class ProductController extends Controller
         ], 200);
     }
 
-    //Lägg till kategori
-    public function addCategory(Request $request)
+    //Hämta alla produkter
+    public function getProducts(Request $request)
     {
-        //Validerar och kontrollerar att allt är ifyllt. Skrivs ut ett felmeddelande om något inte är ifyllt. Krav på att alla fält ska vara ifyllda
-        $request->validate([
-            'categoryname' => 'required',
-            'categorydescription' => 'required'
-        ]);
 
-        return Category::create($request->all());
+        $products = Products::all();
+
+        foreach ($products as $product) {
+            $category = Category::find($product->category_id);
+            $product->categoryname = $category->categoryname;
+        }
+
+
+
+        return $products;
     }
 
-    //Hämta alla kategorier
-    public function getCategories(Request $request)
-    {
-        //Returnerar alla lagrade kategorier
-        return Category::all();
-    }
+
 
     //Funktion för att hämta en produkt utifrån produktens id
     public function getProductById($id)
@@ -73,6 +66,8 @@ class ProductController extends Controller
         }
     }
 
+
+
     public function updateProduct(Request $request, $id)
     {
         //Hämtar product utifrån dess id och sparar i variabeln $product
@@ -83,6 +78,7 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
+            'shelf' => 'required',
             'quantity' => 'required'
         ]);
 
@@ -97,6 +93,7 @@ class ProductController extends Controller
             return response()->json(['producten kunde inte hittas'], 404);
         }
     }
+
 
     //Funktion för att ta bort en produkt
     public function destroy($id)
