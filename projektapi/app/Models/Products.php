@@ -14,10 +14,14 @@ class Products extends Model
         'description',
         'price',
         'quantity',
+        'shelf',
         'category_id'
     ];
+
 
     public function category(){
         return $this->belongsTo(Category::class);
     }
+
+
 }
