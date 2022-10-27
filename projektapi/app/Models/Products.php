@@ -19,9 +19,8 @@ class Products extends Model
     ];
 
 
+    //Använder belongsto till Category. Ett-till-många
     public function category(){
         return $this->belongsTo(Category::class);
     }
-
-
 }

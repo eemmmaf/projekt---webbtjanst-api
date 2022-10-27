@@ -12,6 +12,7 @@ class ProductController extends Controller
     public function addProduct(Request $request)
     {
 
+        //Kontrollerar att alla fält är ifyllda
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -23,24 +24,25 @@ class ProductController extends Controller
 
         //Lägger till och returnerar den nya Produkten som har skapats
         return Products::create($request->all());
-
         return response()->json([
             'Produkt har lagts till'
         ], 200);
     }
 
+
+
     //Hämta alla produkter
     public function getProducts(Request $request)
     {
 
+        //Returnerar alla produkter
         $products = Products::all();
 
+        //Loopar igenom och gör en typ av join så att kategorins namn hamnar i produkt-tabellen
         foreach ($products as $product) {
             $category = Category::find($product->category_id);
             $product->categoryname = $category->categoryname;
         }
-
-
 
         return $products;
     }
@@ -68,6 +70,7 @@ class ProductController extends Controller
 
 
 
+    //Funktion för att uppdatera produkt 
     public function updateProduct(Request $request, $id)
     {
         //Hämtar product utifrån dess id och sparar i variabeln $product
@@ -108,13 +111,14 @@ class ProductController extends Controller
             //Returnerar 
             return response()->json(['Produkten har tagits bort']);
         } else {
-            return response()->json(['Producten kunde inte hittas'], 404);
+            return response()->json(['Produkten kunde inte hittas'], 404);
         }
     }
 
     //Funktion för att söka efter produkt
     public function searchProduct($name)
     {
+        //Returnerar produkter som innehåller det sökta namnet
         return Products::where('name', 'like', '%' . $name . '%')->get();
     }
 }

@@ -35,7 +35,7 @@ Route::put('/updateproduct/{id}', [ProductController::class, 'updateProduct'])->
 Route::delete('/deleteproduct/{id}', [ProductController::class, 'destroy'])->middleware('auth:sanctum');  //Tar bort en produkt
 
 //Route för att registrera 
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'register'])->middleware('auth:sanctum');
 //Route för att logga in
 Route::post('/login', [AuthController::class, 'login']);
 //Route för att logga ut

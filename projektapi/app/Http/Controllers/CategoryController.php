@@ -16,6 +16,7 @@ class CategoryController extends Controller
             'categorydescription' => 'required'
         ]);
 
+        //Returnerar och skapar kategorin
         return Category::create($request->all());
     }
 
@@ -26,7 +27,7 @@ class CategoryController extends Controller
          return Category::all();
      }
 
-      //Funktion för att hämta en produkt utifrån produktens id
+      //Funktion för att hämta en produkt utifrån Kategorins id
     public function getCategoryById($id)
     {
 
@@ -35,12 +36,12 @@ class CategoryController extends Controller
 
         //Kontroll om variabeln $product inte är lika med null
         if ($category != null) {
-            //Returnerar Produkten
+            //Returnerar Kategorin
             return $category;
         } else {
             //Skriver ut felmeddelande och felkoden 404 om variabeln $product är null
             return response()->json([
-                'Produkten kunde inte hittas!'
+                'Kategorin kunde inte hittas!'
             ], 404);
         }
     }
@@ -63,7 +64,7 @@ class CategoryController extends Controller
             //Returnerar det uppdaterade innehållet
             return $category;
         } else {
-            //Returnerar ett felmeddelande och felkod om producten inte kunde hittas
+            //Returnerar ett felmeddelande och felkod om kategorin inte kunde hittas
             return response()->json(['Kategorin kunde inte hittas'], 404);
         }
     }
@@ -71,12 +72,12 @@ class CategoryController extends Controller
     //Ta bort kategori
     public function deleteCategory($id)
     {
-        //Hämtar product utifrån dess ID
+        //Hämtar kategori utifrån dess ID
         $category = Category::find($id);
 
-        //Kontroll om producten inte är lika med null
+        //Kontroll om kategorin inte är lika med null
         if ($category != null) {
-            //Tar bort producten
+            //Tar bort kategorin
             $category->delete();
             //Returnerar 
             return response()->json(['Kategorin har tagits bort']);
