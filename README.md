@@ -86,7 +86,7 @@ Ett kategori-objekt returneras/skickas som JSON med följande struktur:
 ### Sanctum
 Alla Routes förutom /login är skyddade av Laravels inbyggda system Sanctum. För att komma åt routesen måste ett användarkonto registreras.
 
-## Provköra detta repo
+## Provköra denna REST-webbtjänst
 * Klona detta repo
 * Installera Laravel CLI med kommandot `composer global require laravel/installer`
 * Stå i mappen för projektapi
