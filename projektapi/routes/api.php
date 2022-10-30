@@ -22,7 +22,7 @@ use App\Http\Controllers\CategoryController;
 //Kategori-routes
 Route::post('/addcategory', [CategoryController::class, 'addCategory'])->middleware('auth:sanctum');  //Lägger till en kategori
 Route::get('/getcategories', [CategoryController::class, 'getCategories'])->middleware('auth:sanctum');  //Hämtar alla kategorier
-Route::get('/getcategory/{id}', [CategoryController::class, 'getCategoryById'])->middleware('auth:sanctum');  //Hämtar alla kategorier
+Route::get('/getcategory/{id}', [CategoryController::class, 'getCategoryById'])->middleware('auth:sanctum');  //Hämtar kategori utifrån id
 Route::put('/updatecategory/{id}', [CategoryController::class, 'updateCategory'])->middleware('auth:sanctum'); //Uppdaterar en kategori
 Route::delete('/deletecategory/{id}', [CategoryController::class, 'deleteCategory'])->middleware('auth:sanctum');  //Tar bort en kategori
 

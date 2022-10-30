@@ -14,7 +14,7 @@ class Category extends Model
         'categorydescription'
     ];
 
-    //Använder hasMany till Products. Många-till-ett
+    //Använder hasMany till Products. Ett-till-många
     public function products() {
         return $this->hasMany(Products::class);
     }
